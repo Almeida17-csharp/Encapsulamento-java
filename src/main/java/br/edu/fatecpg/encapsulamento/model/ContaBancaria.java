@@ -1,10 +1,10 @@
 package br.edu.fatecpg.encapsulamento.model;
 
 public class ContaBancaria {
-    private String titular;
+    private Usuario titular;
     private double saldo;
 
-    public ContaBancaria(String titular, double saldoInicial) {
+    public ContaBancaria(Usuario titular, double saldoInicial) {
         this.titular = titular;
         if (saldoInicial > 0) {
             this.saldo = saldoInicial;
@@ -13,11 +13,11 @@ public class ContaBancaria {
         }
     }
 
-    public String getTitular() {
+    public Usuario getTitular() {
         return titular;
     }
 
-    public void setTitular(String titular) {
+    public void setTitular(Usuario titular) {
         this.titular = titular;
     }
 
@@ -42,6 +42,18 @@ public class ContaBancaria {
             System.out.println("Erro: Saldo insuficiente. Saldo atual: R$ " + this.saldo);
         } else {
             System.out.println("Erro: O valor de saque deve ser positivo.");
+        }
+    }
+
+    public void transferir(double valor, ContaBancaria contaDestino) {
+        if (valor > 0 && valor <= this.saldo) {
+            this.saldo -= valor;
+            contaDestino.saldo += valor;
+            System.out.println("Transferência de R$ " + valor + " para " + contaDestino.getTitular().getNome() + " realizada com sucesso!");
+        } else if (valor > this.saldo) {
+            System.out.println("Erro: Saldo insuficiente para transferência. Saldo atual: R$ " + this.saldo);
+        } else {
+            System.out.println("Erro: O valor da transferência deve ser positivo.");
         }
     }
 }
