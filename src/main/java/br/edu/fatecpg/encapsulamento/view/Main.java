@@ -1,46 +1,62 @@
 package br.edu.fatecpg.encapsulamento.view;
 
-import br.edu.fatecpg.encapsulamento.model.Carro;
-
-import java.util.LinkedList;
 import java.util.Scanner;
+import java.time.LocalTime;
 
 public class Main {
-    static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Carro c1 = new Carro("", "", "", 0);
-        LinkedList<Carro> carros = new LinkedList<>();
-        Double valorGas, distancia;
-        int velocidade;
+        int opcao = -1;
+        String saudacao = saudacao();
 
-        c1.setMarca("Renault");
-        System.out.println("Marca: " + c1.getMarca());
-        c1.setModelo("Sandero");
-        System.out.println("Modelo: " + c1.getModelo());
-        c1.setPlaca("EFG-4H56");
-        System.out.println("Placa: " + c1.getPlaca());
-        c1.setCapacidadeGasolina(55);
-        System.out.println("Capacidade do tanque em Litros: " + c1.getCapacidadeGasolina());
+        do {
+            System.out.println("\nOlá, " + saudacao + "! Gostaria de ver o que?\n"
+                    + "1 - Carros\n"
+                    + "2 - Conta Bancária\n"
+                    + "3 - Produtos\n"
+                    + "0 - Sair");
+            System.out.print("Digite uma opção: ");
 
-        System.out.println("\n===============================\n");
+            opcao = scan.nextInt();
+            scan.nextLine();
 
-        System.out.print("Olá, qual o valor da gasolina no posto (por Litro)? ");
-        valorGas = scan.nextDouble();
+            switch (opcao) {
+                case 1:
+                    System.out.println("Você está vendo os carros!");
+                    UsarCarro.executar();
+                    break;
+                case 2:
+                    System.out.println("Você está vendo as contas!");
+                    UsarContaBancaria.executar();
+                    break;
+                case 3:
+                    System.out.println("Funcionalidade de Produtos em desenvolvimento...");
+                    break;
+                case 0:
+                    System.out.println("Saindo do sistema...");
+                    break;
+                default:
+                    System.out.println("Opção inválida! Tente novamente.");
+                    break;
+            }
+        } while(opcao != 0);
 
-        System.out.println(c1.encherTanque(valorGas, c1.getCapacidadeGasolina()));
+        scan.close();
+    }
 
-        scan.nextLine();
+    static String saudacao() {
+        LocalTime agora = LocalTime.now();
+        int hora = agora.getHour();
+        String periodo;
 
-        System.out.print("Você deseja ligar o carro agora? (y/n) ");
-        if (scan.nextLine().contains("y")){
-            System.out.println(c1.ligar());
-        }else {
-            System.out.println(c1.desligar());
+        if (hora >= 5 && hora < 12) {
+            periodo = "Bom dia";
+        } else if (hora >= 12 && hora < 18) {
+            periodo = "Boa tarde";
+        } else {
+            periodo = "Boa noite";
         }
-        System.out.print("Qual velocidade você está dirigindo? ");
-        velocidade = scan.nextInt();
-        System.out.print("Qual a distância que você quer percorrer? ");
-        distancia = scan.nextDouble();
-        System.out.println(c1.acelerar(velocidade, distancia));
+
+        return periodo + " Senhor(a)";
     }
 }
