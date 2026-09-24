@@ -41,9 +41,9 @@ public class Carro {
                 velocidade, distancia, tempoMinutos, tempoHoras);
     }
 
-    public String encherTanque(Double precoGas, int qtdGas) {
+    public String encherTanque(Double precoGas) {
         double valorTotal;
-        valorTotal = precoGas * qtdGas;
+        valorTotal = precoGas * this.capacidadeGasolina;
         return String.format("Valor a pagar: R$ %.2f", valorTotal);
     }
 }

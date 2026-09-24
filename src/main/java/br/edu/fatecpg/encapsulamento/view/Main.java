@@ -30,7 +30,8 @@ public class Main {
                     UsarContaBancaria.executar();
                     break;
                 case 3:
-                    System.out.println("Funcionalidade de Produtos em desenvolvimento...");
+                    System.out.println("Você está vendo os produtos!");
+                    UsarProduto.executar();
                     break;
                 case 0:
                     System.out.println("Saindo do sistema...");

@@ -69,7 +69,7 @@ public class UsarCarro {
             double valorGas = scan.nextDouble();
             scan.nextLine();
 
-            System.out.println(c1.encherTanque(valorGas, c1.getCapacidadeGasolina()));
+            System.out.println(c1.encherTanque(valorGas));
         }
 
         System.out.println("\n===============================\n");
